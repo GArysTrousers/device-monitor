@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
+using System.Diagnostics;
 using System.Drawing;
 using System.Linq;
 using System.Net;
@@ -9,6 +10,7 @@ using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
+using Newtonsoft.Json;
 
 namespace Network_Device_Monitor
 {
@@ -45,7 +47,7 @@ namespace Network_Device_Monitor
             {
                 var newDevice = new Device(txtIP.Text);
                 Model.AddDevice(txtIP.Text);
-                listDevices.Items.Add(String.Format("{0} - Waiting", txtIP.Text));
+                listDevices.Items.Add(String.Format("{0,16} : Waiting", txtIP.Text));
             }
             catch (FormatException E)
             {
@@ -53,33 +55,49 @@ namespace Network_Device_Monitor
             }
         }
 
-        public void PingDevice(Device device)
+        private void mbtnEmail_Click(object sender, EventArgs e)
         {
-            var ping = new Ping();
-            ping.PingCompleted += (pingSender, eventArgs) =>
-            {
-                if (eventArgs.Reply.Status == IPStatus.Success)
-                {
-                    output = string.Format("Address: {0}\n", eventArgs.Reply.Address.ToString());
-                    output += string.Format("RoundTrip time: {0}\n", eventArgs.Reply.RoundtripTime);
-                    txtOutput.Text = output;
-                }
-                else if (eventArgs.Reply.Status == IPStatus.BadDestination)
-                {
-                    txtOutput.Text = eventArgs.Reply.Status.ToString();
-                }
-                else
-                {
-                    //Console.WriteLine(reply.Status);
-                    txtOutput.Text = eventArgs.Reply.Status.ToString();
-                }
-            };
-            ping.SendAsync(device.ip, 1);
+            var emailSettings = new FormEmailSettings();
+            emailSettings.ShowDialog();
         }
 
-        private void btnTestEmail_Click(object sender, EventArgs e)
+        private void mbtnLoad_Click(object sender, EventArgs e)
         {
-            Model.Email(new Device("10.139.208.123"));
+            if (openFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                //open file and read from it
+                string json = "{}";
+
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new IPAddressConverter());
+                settings.Formatting = Formatting.Indented;
+
+                var modelSave = JsonConvert.DeserializeObject<ModelSave>(json, settings);
+            }
+        }
+
+        private void mbtnSave_Click(object sender, EventArgs e)
+        {
+            if (saveFileDialog.ShowDialog() == DialogResult.OK)
+            {
+                var settings = new JsonSerializerSettings();
+                settings.Converters.Add(new IPAddressConverter());
+                settings.Formatting = Formatting.Indented;
+
+                var json = JsonConvert.SerializeObject(new ModelSave(), settings);
+                Debug.WriteLine(json);
+
+                //Open file and write to it
+            }
+        }
+
+        private void btnRemoveDevice_Click(object sender, EventArgs e)
+        {
+            Model.devices.RemoveAt(listDevices.SelectedIndex);
+            listDevices.Items.RemoveAt(listDevices.SelectedIndex);
         }
     }
+
+
+    
 }

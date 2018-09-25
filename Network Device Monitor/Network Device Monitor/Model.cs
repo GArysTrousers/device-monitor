@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Net.Mail;
 using System.Text;
@@ -8,12 +9,10 @@ using System.Windows.Forms;
 
 namespace Network_Device_Monitor
 {
-    public static class Model
+    public class Model
     {
-        public static int EmailErrorLimit = 6;
-        public static String 
-            EmailFrom = "device.monitor.mail@gmail.com",
-            EmailTo = "lee.ben.b@edumail.vic.gov.au";
+        public static int emailErrorLimit = 6;
+        public static MailMan mailMan;
 
         public static List<Device> devices = new List<Device>();
         public static FormDisplay Display;
@@ -31,32 +30,22 @@ namespace Network_Device_Monitor
 
         public static void UpdateDevice(Device device)
         {
-            Display.UpdateDevice(devices.IndexOf(device), device.output);
+            try
+            {
+                Display.UpdateDevice(devices.IndexOf(device), device.output);
+            }
+            catch { } //if there is a ping request for a deleted device, it will throw
         }
 
         public static void Email(Device device)
         {
-            try
+            if (mailMan != null)
             {
-                MailMessage mail = new MailMessage(EmailFrom, EmailTo);
-                SmtpClient client = new SmtpClient();
-                client.Port = 587;
-                client.DeliveryMethod = SmtpDeliveryMethod.Network;
-                client.UseDefaultCredentials = false;
-                client.Credentials = new System.Net.NetworkCredential(EmailFrom, "Password");
-                client.Host = "smtp.gmail.com";
-                client.EnableSsl = true;
-                mail.Subject = "There is a Device Down at OSC";
-                mail.Body = String.Format("Device IP: {0}", device.ip);
+                String subject = "There is a Device Down at OSC";
+                String body = String.Format("Device IP: {0}", device.ip);
 
-                client.Send(mail);
-                MessageBox.Show("Test Email Sent");
+                mailMan.Send(subject, body);
             }
-            catch (Exception E)
-            {
-                //MessageBox.Show(String.Format("{0}", E));
-            }
-            
         }
     }
 }

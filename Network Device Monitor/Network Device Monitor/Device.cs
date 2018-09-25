@@ -7,6 +7,7 @@ using System.Threading.Tasks;
 using System.Net.NetworkInformation;
 using System.Drawing;
 using System.Windows.Forms;
+using System.Diagnostics;
 
 namespace Network_Device_Monitor
 {
@@ -21,15 +22,15 @@ namespace Network_Device_Monitor
             this.ip = IPAddress.Parse(ip);
         }
 
-        public void Log()
+        public void Log(string log)
         {
-
+            Debug.WriteLine(log);
         }
 
         public void ConnectionError()
         {
             consecErrors += 1;
-            if (consecErrors == Model.EmailErrorLimit)
+            if (consecErrors == Model.emailErrorLimit)
                 Model.Email(this);
         }
 
@@ -40,19 +41,17 @@ namespace Network_Device_Monitor
             {
                 if (eventArgs.Reply.Status == IPStatus.Success)
                 {
-                    output = string.Format("Address: {0}\n", eventArgs.Reply.Address.ToString());
-                    output += string.Format("RoundTrip time: {0}\n", eventArgs.Reply.RoundtripTime);
+                    output = string.Format("{0,16} : Connected - Ping: {1}ms", 
+                        ip, eventArgs.Reply.RoundtripTime);
                     consecErrors = 0;
-                }
-                else if (eventArgs.Reply.Status == IPStatus.BadDestination)
-                {
-                    output = "Connection Failed";
                 }
                 else
                 {
-                    output = "Connection Failed";
+                    ConnectionError();
+                    output = string.Format("{0,16} : Connection Attempts Failed {1}", 
+                        ip, consecErrors);
                 }
-                Log();
+                Log(output);
                 Model.UpdateDevice(this);
             };
             ping.SendAsync(ip, 1);

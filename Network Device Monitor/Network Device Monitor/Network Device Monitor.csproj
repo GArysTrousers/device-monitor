@@ -32,6 +32,9 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">
+      <HintPath>..\packages\Newtonsoft.Json.11.0.2\lib\net45\Newtonsoft.Json.dll</HintPath>
+    </Reference>
     <Reference Include="System" />
     <Reference Include="System.Core" />
     <Reference Include="System.Xml.Linq" />
@@ -46,6 +49,13 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Device.cs" />
+    <Compile Include="FormEmailSettings.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="FormEmailSettings.Designer.cs">
+      <DependentUpon>FormEmailSettings.cs</DependentUpon>
+    </Compile>
+    <Compile Include="MailMan.cs" />
     <Compile Include="FormDisplay.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -53,8 +63,12 @@
       <DependentUpon>FormDisplay.cs</DependentUpon>
     </Compile>
     <Compile Include="Model.cs" />
+    <Compile Include="ModelSave.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <EmbeddedResource Include="FormEmailSettings.resx">
+      <DependentUpon>FormEmailSettings.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="FormDisplay.resx">
       <DependentUpon>FormDisplay.cs</DependentUpon>
     </EmbeddedResource>
@@ -67,6 +81,7 @@
       <AutoGen>True</AutoGen>
       <DependentUpon>Resources.resx</DependentUpon>
     </Compile>
+    <None Include="packages.config" />
     <None Include="Properties\Settings.settings">
       <Generator>SettingsSingleFileGenerator</Generator>
       <LastGenOutput>Settings.Designer.cs</LastGenOutput>
