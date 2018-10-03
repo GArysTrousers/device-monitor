@@ -1,0 +1,14 @@
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\bin\Debug\Network Device Monitor.exe.config
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\bin\Debug\Network Device Monitor.exe
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\bin\Debug\Network Device Monitor.pdb
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network Device Monitor.csprojAssemblyReference.cache
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network_Device_Monitor.FormDisplay.resources
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network_Device_Monitor.Properties.Resources.resources
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network Device Monitor.csproj.GenerateResource.cache
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network Device Monitor.csproj.CoreCompileInputs.cache
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network Device Monitor.exe
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network Device Monitor.pdb
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network_Device_Monitor.FormEmailSettings.resources
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\bin\Debug\Newtonsoft.Json.dll
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\bin\Debug\Newtonsoft.Json.xml
+C:\Users\bl\source\repos\Network Device Monitor\Network Device Monitor\obj\Debug\Network Device Monitor.csproj.CopyComplete
