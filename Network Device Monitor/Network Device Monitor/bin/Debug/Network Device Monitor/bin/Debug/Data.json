@@ -1,0 +1,38 @@
+{
+  "emailEnabled": true,
+  "pinginterval": 10000,
+  "emailErrorLimit": 6,
+  "devices": [
+    {
+      "name": "L3L4",
+      "ip": "10.139.208.69",
+      "output": "        L3L4 - 10.139.208.69   : Connected - Ping: 9ms",
+      "consecErrors": 0
+    },
+    {
+      "name": "Core2",
+      "ip": "10.139.208.64",
+      "output": "       Core2 - 10.139.208.64   : Connected - Ping: 9ms",
+      "consecErrors": 0
+    },
+    {
+      "name": "VCAL",
+      "ip": "10.139.208.72",
+      "output": "        VCAL - 10.139.208.72   : Connected - Ping: 11ms",
+      "consecErrors": 0
+    },
+    {
+      "name": "Workshop",
+      "ip": "10.139.208.85",
+      "output": "    Workshop - 10.139.208.85   : Connected - Ping: 15ms",
+      "consecErrors": 0
+    }
+  ],
+  "emailFrom": "device.monitor.mail@gmail.com",
+  "emailPassword": "Dev!ceM0nitor",
+  "emailTo": [
+    "lee.ben.b@edumail.vic.gov.au"
+  ],
+  "host": "smtp.gmail.com",
+  "port": 587
+}
